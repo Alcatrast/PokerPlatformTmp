@@ -154,11 +154,12 @@ namespace Poker.RoomsMC
             RoomResponse response = new RoomResponse();
             if (BaseAccounts.GetCurrentRoom(accountId) == RoomId && BaseAccounts.IsPasswordRight(accountId, accountPassword))
             {
+                response.RoomId= RoomId;
                 response.RoomState = RoomState;
                 if (RoomState == 1)
                 {
-                    response.RoomState = RoomState;
                     response.SelfId = tmpIds.IndexOf(accountId) + 1;
+
                     for (int i = 0; i < tmpIds.Count; i++)
                     {
                         response.Players.Add(new AccountResponse());

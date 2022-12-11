@@ -11,16 +11,18 @@ namespace Poker.RoomsMC
     [Serializable]
     public class RoomResponse
     {
+        public string RoomId;
         public int SelfId;
         public int RoomState;
         public List<AccountResponse> Players;
         public TableResponse Table;
         public RoomResponse()
         {
-            SelfId = 0;
-            RoomState = 0;
-            Players = new List<AccountResponse>();
-            Table = new TableResponse();
+            this.RoomId=string.Empty;
+            this.SelfId = 0;
+            this.RoomState = 0;
+            this.Players = new List<AccountResponse>();
+            this.Table = new TableResponse();
         }
     }
     [Serializable]
@@ -37,13 +39,13 @@ namespace Poker.RoomsMC
         public int State;
         public AccountResponse()
         {
-            Name = string.Empty;
-            Avatar = string.Empty;
-            Bid = 0;
-            Money = 0;
-            Cards = new List<string>();
-            CombinationCard = new List<string>();
-            State = 0;
+            this.Name = string.Empty;
+            this.Avatar = string.Empty;
+            this.Bid = 0;
+            this.Money = 0;
+            this.Cards = new List<string>();
+            this.CombinationCard = new List<string>();
+            this.State = 0;
 
         }
     }
@@ -59,13 +61,13 @@ namespace Poker.RoomsMC
         public List<int> WinnersId;
         public TableResponse()
         {
-            TotalBank = 0;
-            Cards = new List<string>();
-            Skinset = new RoomCosmeticResponse();
-            RoundNumber = 0;
-            RoundStage = 0;
-            DealerId = 0;
-            WinnersId = new List<int>();
+            this.TotalBank = 0;
+            this.Cards = new List<string>();
+            this.Skinset = new RoomCosmeticResponse();
+            this.RoundNumber = 0;
+            this.RoundStage = 0;
+            this.DealerId = 0;
+            this.WinnersId = new List<int>();
         }
     }
     [Serializable]
@@ -76,9 +78,9 @@ namespace Poker.RoomsMC
         public string TableSkin;
         public RoomCosmeticResponse()
         {
-            CardBackSkin = string.Empty;
-            CardFrontSkin = string.Empty;
-            TableSkin = string.Empty;
+            this.CardBackSkin = string.Empty;
+            this.CardFrontSkin = string.Empty;
+            this.TableSkin = string.Empty;
         }
     }
 }
