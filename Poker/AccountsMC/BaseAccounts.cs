@@ -35,12 +35,26 @@ namespace Poker.AccountsMC
         }
         private static int GetIndex(string id)
         {
-            string sid = string.Empty;
-            for (int i = 2; i < id.Length; i++)
+            if (id != null)
             {
-                sid += id[i];
+                if (id.Length > 1)
+                {
+                    if (id[0] == 'a' && id[1]=='c')
+                    {
+                        string sid = string.Empty;
+                        for (int i = 2; i < id.Length; i++)
+                        {
+                            sid += id[i];
+                        }
+                        int index = 0;
+                        int.TryParse(sid, out index);
+                        index--;
+                        if (index < 0 || index >= accounts.Count) { return 0; }
+                        return index;
+                    }
+                }
             }
-            return int.Parse(sid) - 1;
+            return 0;
         }
         public static bool TopUpBalance(string id, int money)
         {

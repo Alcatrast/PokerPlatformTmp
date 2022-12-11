@@ -26,6 +26,29 @@ namespace Poker.RoomsMC
             }
             currentRoomId = "r" + Convert.ToString(int.Parse(sid) + 1);
         }
+        private static int GetIndex(string id)
+        {
+            if (id != null)
+            {
+                if (id.Length > 1)
+                {
+                    if (id[0] == 'r')
+                    {
+                        string sid = string.Empty;
+                        for (int i = 1; i < id.Length; i++)
+                        {
+                            sid += id[i];
+                        }
+                        int index = 0;
+                        int.TryParse(sid, out index);
+                        index--;
+                        if (index < 0 || index >= rooms.Count) { return 0; }
+                        return index;
+                    }
+                }
+            }
+            return 0;
+        }
 
         public static string CreateRoom(string createrId, string createrPassword, int countAccounts, int startBank)
         {
@@ -39,5 +62,18 @@ namespace Poker.RoomsMC
             return string.Empty;
         }
 
-    }
+        public static bool Join(string roomId, string accountId, string accountPassword)
+        {
+            return rooms[GetIndex(roomId)].Join(accountId, accountPassword);
+
+        }
+        public static bool Leave( string accountId, string accountPassword)
+        {
+            return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Leave(accountId, accountPassword);
+        }
+        public static bool Update( string accountId, string accountPassword, string function)
+        {
+            return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Update(accountId, accountPassword, function);
+        }
+       
 }
