@@ -37,7 +37,7 @@ namespace Poker.AccountsMC
         {
             if (id != null)
             {
-                if (id.Length > 1)
+                if (id.Length > 2)
                 {
                     if (id[0] == 'a' && id[1]=='c')
                     {
