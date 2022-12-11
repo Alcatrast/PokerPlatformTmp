@@ -52,7 +52,7 @@ namespace Poker.RoomsMC
 
         public static string CreateRoom(string createrId, string createrPassword, int countAccounts, int startBank)
         {
-            if (BaseAccounts.IsPasswordRight(createrId, createrPassword))
+            if (BaseAccounts.IsPasswordRight(createrId, createrPassword) && startBank >= 200 && countAccounts > 1)
             {
                 ChangeCurrentRoomId();
                 rooms.Add(new Room(currentRoomId, countAccounts, startBank));
@@ -78,6 +78,72 @@ namespace Poker.RoomsMC
         public static RoomResponse Get(string accountId, string accountPassword)
         {
             return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Get(accountId, accountPassword);
+        }
+
+        public static RoomResponse ProcessingRequest(string accountId, string accountPassword, string function)
+        {
+            if (function != null)
+            {
+                if (function.Length > 3)
+                {
+                    string[] command = function.Split(',');
+                    if (command.Length > 0)
+                    {
+                        if (command[0] == "CREATE")
+                        {
+                            if (command.Length >= 3)
+                            {
+                                int p1 = 0, p2 = 0;
+                                int.TryParse(command[1], out p1);
+                                int.TryParse(command[2], out p2);
+                                if (CreateRoom(accountId, accountPassword, p1, p2) != string.Empty)
+                                {
+                                    return Get(accountId, accountPassword);
+                                }
+                                else
+                                {
+                                    return new RoomResponse();
+                                }
+                            }
+                            else if (command[0] == "JOIN")
+                            {
+                                if (command.Length >= 2)
+                                {
+                                    if (Join(command[1], accountId, accountPassword))
+                                    {
+                                        return Get(accountId, accountPassword);
+                                    }
+                                    else
+                                    {
+                                        return new RoomResponse();
+                                    }
+                                }
+                            }
+                            else if (command[0] == "LEAVE")
+                            {
+                                if (Leave(accountId, accountPassword))
+                                {
+                                    return new RoomResponse();
+                                }
+                                else
+                                {
+                                    return Get(accountId, accountPassword);
+                                }
+                            }
+                            else if (command[0] == "UPDATE")
+                            {
+                                if (command.Length >= 2)
+                                {
+                                    if (Update(accountId, accountPassword, command[1])) { return Get(accountId, accountPassword); }
+                                    else { return Get(accountId, accountPassword); }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return new RoomResponse();
         }
     }
 }
