@@ -16,6 +16,7 @@ namespace Poker.RoomsMC
         {
             rooms = new List<Room>();
             currentRoomId = "r0";
+
         }
         private static void ChangeCurrentRoomId()
         {
