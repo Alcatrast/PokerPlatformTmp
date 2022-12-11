@@ -75,5 +75,9 @@ namespace Poker.RoomsMC
         {
             return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Update(accountId, accountPassword, function);
         }
+        public static RoomResponse Get(string accountId, string accountPassword)
+        {
+            return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Get(accountId, accountPassword);
+        }
     }
 }
