@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Xml.Serialization;
 using Poker.PokerGameMC;
+using Poker.RoomsMC;
 
 namespace Poker
 {
@@ -14,7 +15,7 @@ namespace Poker
             //List<int> l = new List<int>();
             //PokerTable pt = new PokerTable(5, 52, l);
             //GameState gameState = new GameState(5, 500);
-
+            BaseRooms.Initializate();
 
             PokerController pc = new PokerController(4, 200, 52, new List<List<int>>());
             pc.StartRound(4);
