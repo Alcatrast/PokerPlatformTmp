@@ -67,13 +67,13 @@ namespace Poker.RoomsMC
             return rooms[GetIndex(roomId)].Join(accountId, accountPassword);
 
         }
-        public static bool Leave( string accountId, string accountPassword)
+        public static bool Leave(string accountId, string accountPassword)
         {
             return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Leave(accountId, accountPassword);
         }
-        public static bool Update( string accountId, string accountPassword, string function)
+        public static bool Update(string accountId, string accountPassword, string function)
         {
             return rooms[GetIndex(BaseAccounts.GetCurrentRoom(accountId))].Update(accountId, accountPassword, function);
         }
-       
+    }
 }
