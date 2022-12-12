@@ -21,21 +21,23 @@ namespace Poker
                         {
                             RequestShop(command);
                         }
-                        else if (command[0]=="ROOM"){ RequestRoom(command); }
+                        else if (command[0]=="ROOM" && command.Length>=4){ RequestRoom(command); }
                     }
                 }
             }
         }
         private static void GetEmptyResponse() { }
         private static void RequestShop(string[] command)
-        {
-            
+        { 
            throw new NotImplementedException();
         }
-        private static void RequestRoom(string[] command)
+        private static void RequestAccount(string[] command)
         {
-            BaseRooms.ProcessingRequest(command[2], command[3], command[1]);
 
+        }
+        private static RoomResponse RequestRoom(string[] command)
+        {
+          return BaseRooms.ProcessingRequest(command[2], command[3], command[1]);
         }
     }
 }
