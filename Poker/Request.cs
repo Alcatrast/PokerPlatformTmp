@@ -9,6 +9,7 @@ namespace Poker
     public class Request
     {
         public string Command;
+
     }
    
 
