@@ -17,11 +17,11 @@ namespace Poker
                     string[] command = request.Split('/');
                     if(command.Length > 0)
                     {
-                        if (command[0] = "SHOP")
+                        if (command[0] == "SHOP")
                         {
                             RequestShop(command);
                         }
-                        else if (command[0]=="ROOM"){ }
+                        else if (command[0]=="ROOM"){ RequestRoom(command); }
                     }
                 }
             }
