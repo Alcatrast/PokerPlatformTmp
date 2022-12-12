@@ -39,7 +39,7 @@ namespace Poker.AccountsMC
             {
                 if (id.Length > 2)
                 {
-                    if (id[0] == 'a' && id[1]=='c')
+                    if (id[0] == 'a' && id[1] == 'c')
                     {
                         string sid = string.Empty;
                         for (int i = 2; i < id.Length; i++)
@@ -82,18 +82,123 @@ namespace Poker.AccountsMC
         {
             return accounts[GetIndex(id)].Name;
         }
+        public static int GetBalance(string id)
+        {
+            return accounts[GetIndex(id)].Balance;
+        }
         public static string GetCurrentAvatar(string id)
         {
             return BaseCosmetics.Avatars[accounts[GetIndex(id)].Skins.CurrentAvatar % BaseCosmetics.Avatars.Count];
         }
+        
+        private static List<string> GetTableSkins(string id)
+        {
+            List<string> res = new List<string>();
+            List<int> indexes = accounts[GetIndex(id)].Skins.TableSkins;
+            foreach(int ind in indexes)
+            {
+                if (ind < BaseCosmetics.TableSkins.Count)
+                {
+                    res.Add(BaseCosmetics.TableSkins[ind]);
+                }
+            }
+            return res;
+        }
+        private static List<string> GetAvatars(string id)
+        {
+            List<string> res = new List<string>();
+            List<int> indexes = accounts[GetIndex(id)].Skins.Avatars;
+            foreach (int ind in indexes)
+            {
+                if (ind < BaseCosmetics.Avatars.Count)
+                {
+                    res.Add(BaseCosmetics.Avatars[ind]);
+                }
+            }
+            return res;
+        }
+        private static List<string> GetCardBackSkins(string id)
+        {
+            List<string> res = new List<string>();
+            List<int> indexes = accounts[GetIndex(id)].Skins.CardBackSkins;
+            foreach (int ind in indexes)
+            {
+                if (ind < BaseCosmetics.CardBackSkins.Count)
+                {
+                    res.Add(BaseCosmetics.CardBackSkins[ind]);
+                }
+            }
+            return res;
+        }
+        private static List<string> GetCardFrontSkins(string id)
+        {
+            List<string> res = new List<string>();
+            List<int> indexes = accounts[GetIndex(id)].Skins.CardFrontSkins;
+            foreach (int ind in indexes)
+            {
+                if (ind < BaseCosmetics.CardFrontSkins.Count)
+                {
+                    res.Add(BaseCosmetics.CardFrontSkins[ind]);
+                }
+            }
+            return res;
+        }
 
-        internal static RoomCosmeticResponse GetCurrentRoomSkinSet(string id)
+        public static RoomCosmeticResponse GetCurrentRoomSkinSet(string id)
         {
             RoomCosmeticResponse res = new RoomCosmeticResponse();
             res.CardBackSkin = BaseCosmetics.CardBackSkins[accounts[GetIndex(id)].Skins.CurrentCardBackSkin % BaseCosmetics.CardBackSkins.Count];
             res.CardFrontSkin = BaseCosmetics.CardFrontSkins[accounts[GetIndex(id)].Skins.CurrentCardFrontSkin % BaseCosmetics.CardFrontSkins.Count];
             res.TableSkin = BaseCosmetics.TableSkins[accounts[GetIndex(id)].Skins.CurrentTableSkin % BaseCosmetics.TableSkins.Count];
             return res;
+        }
+        public static CosmeticResponse GetCosmeticResponse(string id) 
+        {
+            CosmeticResponse res = new CosmeticResponse();
+            res.Avatars=GetAvatars(id);
+            res.CardBackSkins=GetCardBackSkins(id);
+            res.CardFrontSkins=GetCardFrontSkins(id);
+            res.TableSkins=GetTableSkins(id);
+            return res;
+        }
+        public static AccountResponse GetResponse(string id,string password) 
+        { 
+            AccountResponse res=new AccountResponse();
+            if(IsPasswordRight(id, password))
+            {
+                res.Balance=GetBalance(id);
+                res.Avatar=GetCurrentAvatar(id);
+                res.CurrentRoomId = GetCurrentRoom(id);
+                res.Id = id;
+                res.Name=GetName(id);
+                res.Skins=GetCosmeticResponse(id);
+            }
+                return res;
+        }
+        public static AccountResponse ProcessingRequest(string accountIdName, string accountPassword, string function)
+        {
+            if (function != null)
+            {
+                if (function.Length > 3)
+                {
+                    string[] command = function.Split(',');
+                    if (command.Length > 0)
+                    {
+                        if (command[0] == "CREATE") 
+                        {
+                            string id= Add(accountIdName, accountPassword);
+                            return GetResponse(id, accountPassword);
+                        }else if (command[0] == "GET")
+                        {
+                            return GetResponse(accountIdName, accountPassword);
+                        } else if (command[0] == "UPDATE")
+                        {
+                            throw new NotImplementedException();
+                        }
+                    }
+                }
+            }
+            return new AccountResponse();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Poker.CosmeticsMC
+namespace Poker.CosmeticsMC { 
 
     [Serializable]
     public class CosmeticResponse
@@ -19,6 +19,7 @@ namespace Poker.CosmeticsMC
             CardBackSkins = new List<string>();
             CardFrontSkins = new List<string>();
             TableSkins = new List<string>();
+
         }
     }
 }

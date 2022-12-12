@@ -14,20 +14,20 @@ namespace Poker.RoomsMC
         public string RoomId;
         public int SelfId;
         public int RoomState;
-        public List<AccountResponse> Players;
+        public List<PlayerResponse> Players;
         public TableResponse Table;
         public RoomResponse()
         {
             this.RoomId=string.Empty;
             this.SelfId = 0;
             this.RoomState = 0;
-            this.Players = new List<AccountResponse>();
+            this.Players = new List<PlayerResponse>();
             this.Table = new TableResponse();
         }
     }
     [Serializable]
 
-    public class AccountResponse
+    public class PlayerResponse
     {
         public string Name;
         public string Avatar;
@@ -37,7 +37,7 @@ namespace Poker.RoomsMC
         public List<string> CombinationCard;
         public int CombinationId;
         public int State;
-        public AccountResponse()
+        public PlayerResponse()
         {
             this.Name = string.Empty;
             this.Avatar = string.Empty;

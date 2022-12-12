@@ -162,7 +162,7 @@ namespace Poker.RoomsMC
 
                     for (int i = 0; i < tmpIds.Count; i++)
                     {
-                        response.Players.Add(new AccountResponse());
+                        response.Players.Add(new PlayerResponse());
                         response.Players[response.Players.Count - 1].Name = BaseAccounts.GetName(tmpIds[i]);
                         response.Players[response.Players.Count - 1].Avatar = BaseAccounts.GetCurrentAvatar(tmpIds[i]);
                         response.Players[response.Players.Count - 1].Money = StartBank;
@@ -186,7 +186,7 @@ namespace Poker.RoomsMC
 
                     for (int i = 0; i < accounts.Count; i++)
                     {
-                        response.Players.Add(new AccountResponse());
+                        response.Players.Add(new PlayerResponse());
                         response.Players[response.Players.Count - 1].Name = BaseAccounts.GetName(accounts[i]);
                         response.Players[response.Players.Count - 1].Avatar = BaseAccounts.GetCurrentAvatar(accounts[i]);
                         response.Players[response.Players.Count - 1].Money = pokerController.State.playersFreeMoney[i];
