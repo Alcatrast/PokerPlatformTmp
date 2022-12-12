@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Poker.RoomsMC;
 namespace Poker
 {
     internal static class MainController
@@ -29,11 +29,13 @@ namespace Poker
         private static void GetEmptyResponse() { }
         private static void RequestShop(string[] command)
         {
-            throw new NotImplementedException();
+            
+           throw new NotImplementedException();
         }
         private static void RequestRoom(string[] command)
         {
-            throw new NotImplementedException();
+            BaseRooms.ProcessingRequest(command[2], command[3], command[1]);
+
         }
     }
 }

@@ -139,6 +139,10 @@ namespace Poker.RoomsMC
                                     else { return Get(accountId, accountPassword); }
                                 }
                             }
+                            else if (command[0] == "GET")
+                            {
+                               return Get(accountId, accountPassword);  
+                            }
                         }
                     }
                 }
