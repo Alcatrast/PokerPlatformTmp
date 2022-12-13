@@ -12,7 +12,7 @@ namespace Poker.CosmeticsMC {
         public List<string> Avatars;
         public List<string> CardBackSkins;
         public List<string> CardFrontSkins;
-        public List<string> TableSkins;
+        public List<string> TableSkins;//
         public CosmeticResponse()
         {
             Avatars = new List<string>();

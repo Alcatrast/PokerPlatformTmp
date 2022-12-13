@@ -10,7 +10,7 @@ namespace Poker.PokerGameMC
     internal class Card
     {
 
-        public int Strength { get; private set; }
+        public int Strength { get; private set; }//
         public char Suit { get; private set; }
 
         public Card(char suit, int strength)

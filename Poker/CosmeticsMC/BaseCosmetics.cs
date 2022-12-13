@@ -18,6 +18,6 @@ namespace Poker.CosmeticsMC
             CardBackSkins = new List<string> { "CBdefault" };
             CardFrontSkins = new List<string> { "CFdefault" };
             TableSkins = new List<string> { "Tdefault" };
-        }
+        }//
     }
 }

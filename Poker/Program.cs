@@ -8,7 +8,7 @@ using Poker.RoomsMC;
 namespace Poker
 {
     public class Program
-    {
+    {//
         static void Main(string[] args)
         {
 

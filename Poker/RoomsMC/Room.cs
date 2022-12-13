@@ -13,7 +13,7 @@ namespace Poker.RoomsMC
 
     internal class Room
     {
-        public string RoomId { get; private set; }
+        public string RoomId { get; private set; }//
         private List<string> tmpIds;
         private int countAccounts;
         public int StartBank { get; private set; }

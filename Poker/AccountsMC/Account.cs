@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Poker.CosmeticsMC;
-
+//
 namespace Poker.AccountsMC
 {
     internal class Account

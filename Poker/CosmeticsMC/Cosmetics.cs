@@ -9,7 +9,7 @@ namespace Poker.CosmeticsMC
     internal class Cosmetics
     {
         public List<int> Avatars { get; private set; }
-        public int CurrentAvatar { get; private set; }
+        public int CurrentAvatar { get; private set; }//
         public List<int> CardBackSkins { get; private set; }
         public int CurrentCardBackSkin { get; private set; }
         public List<int> CardFrontSkins { get; private set; }

@@ -11,7 +11,7 @@ namespace Poker.PokerGameMC
 
         public List<string> Cards { get; private set; }
         public int Id { get; private set; }
-        private int minValC;
+        private int minValC;//
         private int strengthCInC;
 
         private List<Card> sort(List<Card> cards)

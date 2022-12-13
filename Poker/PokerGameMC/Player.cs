@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Poker.PokerGameMC
 {
     internal class Player
-    {
+    {//
 
         public int Id { get; set; }
         public Combination MaxCombination { get; private set; }

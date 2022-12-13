@@ -13,7 +13,7 @@ namespace Poker.PokerGameMC
 
         public List<Card> deck;
         private int size;
-
+        //
         public Deck(int size) { deck = new List<Card>(); this.size = size; Reset(); }
         public Deck(Deck other)
         {

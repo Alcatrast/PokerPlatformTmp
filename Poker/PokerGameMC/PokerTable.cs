@@ -11,7 +11,7 @@ namespace Poker.PokerGameMC
     internal class PokerTable
     {
 
-        public List<Player> Players { get; private set; }
+        public List<Player> Players { get; private set; }//
         private List<Card> tableCards;
         private List<Player> MoreWinner(List<Player> pls)
         {

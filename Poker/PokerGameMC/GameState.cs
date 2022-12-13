@@ -9,7 +9,7 @@ namespace Poker.PokerGameMC
 {
     [Serializable]
     public class GameState
-    {
+    {//
         public int countPlayers;
         public int nextMovePlayerId;
         /// <summary>

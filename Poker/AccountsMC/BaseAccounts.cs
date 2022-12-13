@@ -175,7 +175,7 @@ namespace Poker.AccountsMC
             }
                 return res;
         }
-        public static AccountResponse ProcessingRequest(string accountIdName, string accountPassword, string function)
+        public static AccountResponse ProcessingRequest(string accountIdName, string accountPassword, string function)//
         {
             if (function != null)
             {

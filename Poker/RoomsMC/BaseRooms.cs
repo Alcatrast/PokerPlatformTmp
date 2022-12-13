@@ -102,7 +102,7 @@ namespace Poker.RoomsMC
                                     return Get(accountId, accountPassword);
                                 }
                                 else
-                                {
+                                {//
                                     return new RoomResponse();
                                 }
                             }

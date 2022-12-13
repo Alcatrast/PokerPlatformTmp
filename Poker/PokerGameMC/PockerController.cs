@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Poker.PokerGameMC
 {
     internal class PokerController
-    {
+    {//
 
         public GameState State { get; private set; }
         private int round;
