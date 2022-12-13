@@ -87,7 +87,7 @@ namespace Poker.AccountsMC
             return accounts[GetIndex(id)].Balance;
         }
         public static string GetCurrentAvatar(string id)
-        {
+        {   
             return BaseCosmetics.Avatars[accounts[GetIndex(id)].Skins.CurrentAvatar % BaseCosmetics.Avatars.Count];
         }
         
@@ -175,6 +175,7 @@ namespace Poker.AccountsMC
             }
                 return res;
         }
+      
         public static AccountResponse ProcessingRequest(string accountIdName, string accountPassword, string function)//
         {
             if (function != null)

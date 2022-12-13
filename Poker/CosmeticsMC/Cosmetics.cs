@@ -8,14 +8,14 @@ namespace Poker.CosmeticsMC
 {
     internal class Cosmetics
     {
-        public List<int> Avatars { get; private set; }
-        public int CurrentAvatar { get; private set; }//
-        public List<int> CardBackSkins { get; private set; }
-        public int CurrentCardBackSkin { get; private set; }
-        public List<int> CardFrontSkins { get; private set; }
-        public int CurrentCardFrontSkin { get; private set; }
-        public List<int> TableSkins { get; private set; }
-        public int CurrentTableSkin { get; private set; }
+        public List<int> Avatars;
+        public int CurrentAvatar;
+        public List<int> CardBackSkins;
+        public int CurrentCardBackSkin;
+        public List<int> CardFrontSkins;
+        public int CurrentCardFrontSkin;
+        public List<int> TableSkins;
+        public int CurrentTableSkin;
         public Cosmetics()
         {
             Avatars = new List<int> { 0 };

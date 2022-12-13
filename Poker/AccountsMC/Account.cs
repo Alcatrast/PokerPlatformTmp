@@ -65,6 +65,20 @@ namespace Poker.AccountsMC
             }
             return false;
         }
+        
+        private void Update(string type, string newProperty)
+        {
+            if (type == "N") { UpdateName(newProperty); }
+            else if (type == "TS") { UpdateTableSkin(newProperty); } 
+            else if (type == "CBS") { }//// 
+            else if (type == "CFS") { }
 
+        }
+        private void UpdateName(string newName) { this.Name = newName; }
+        private void UpdateTableSkin(string newSkin) { 
+            int ncs = this.Skins.TableSkins.IndexOf(BaseCosmetics.TableSkins.IndexOf(newSkin));
+            if (ncs < 0) { ncs = 0; }
+            this.Skins.CurrentTableSkin = ncs;
+        }
     }
 }
