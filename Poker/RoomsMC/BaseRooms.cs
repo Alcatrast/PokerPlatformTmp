@@ -12,7 +12,7 @@ namespace Poker.RoomsMC
     {
         private static List<Room> rooms;
         private static string currentRoomId;
-        public static void Initializate()
+        public static void Initialaize()
         {
             rooms = new List<Room>();
             currentRoomId = "r0";

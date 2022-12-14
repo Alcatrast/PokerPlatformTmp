@@ -13,7 +13,7 @@ namespace Poker.AccountsMC
     {
         private static string currentId;
         private static List<Account> accounts;
-        public static void Initializate()
+        public static void Initialaize()
         {
             accounts = new List<Account>();
             currentId = "ac0";

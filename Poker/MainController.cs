@@ -10,7 +10,7 @@ namespace Poker
 {
     internal static class MainController
     {
-        public static void ProcessRequest(string request)
+        public static string ProcessRequest(string request)
         {
             if (request != null)
             {
@@ -23,11 +23,12 @@ namespace Poker
                         {
                             RequestShop(command);
                         }
-                        else if (command[0]=="ROOM" && command.Length>=4){ RequestRoom(command); }
-                        else if (command[0] == "ACC" && command.Length >= 4) { RequestAccount(command); }
+                        else if (command[0]=="ROOM" && command.Length>=4){ return SerializateToXml(RequestRoom(command)); }
+                        else if (command[0] == "ACC" && command.Length >= 4) { return SerializateToXml(RequestAccount(command)); }
                     }
                 }
             }
+            return "ERROR";
         }
         private static string SerializateToXml(object response) 
         {
