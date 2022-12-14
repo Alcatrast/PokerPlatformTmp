@@ -66,16 +66,35 @@ namespace Poker.AccountsMC
             return false;
         }
         
-        private void Update(string type, string newProperty)
+        public void Update(string type, string newProperty)
         {
             if (type == "N") { UpdateName(newProperty); }
-            else if (type == "TS") { UpdateTableSkin(newProperty); } 
-            else if (type == "CBS") { }//// 
-            else if (type == "CFS") { }
-
+            else if (type == "A") { UpdateAvatar(newProperty); }
+            else if (type == "CBS") { UpdateCardBackSkin(newProperty); }
+            else if (type == "CFS") { UpdateCardFrontSkin(newProperty); }
+            else if (type == "TS") { UpdateTableSkin(newProperty); }
         }
         private void UpdateName(string newName) { this.Name = newName; }
-        private void UpdateTableSkin(string newSkin) { 
+        private void UpdateAvatar(string newSkin)
+        {
+            int ncs = this.Skins.Avatars.IndexOf(BaseCosmetics.Avatars.IndexOf(newSkin));
+            if (ncs < 0) { ncs = 0; }
+            this.Skins.CurrentAvatar = ncs;
+        }
+        private void UpdateCardBackSkin(string newSkin)
+        {
+            int ncs = this.Skins.CardBackSkins.IndexOf(BaseCosmetics.CardBackSkins.IndexOf(newSkin));
+            if (ncs < 0) { ncs = 0; }
+            this.Skins.CurrentCardBackSkin = ncs;
+        }
+        private void UpdateCardFrontSkin(string newSkin)
+        {
+            int ncs = this.Skins.CardFrontSkins.IndexOf(BaseCosmetics.CardFrontSkins.IndexOf(newSkin));
+            if (ncs < 0) { ncs = 0; }
+            this.Skins.CurrentCardFrontSkin = ncs;
+        }
+        private void UpdateTableSkin(string newSkin)
+        {
             int ncs = this.Skins.TableSkins.IndexOf(BaseCosmetics.TableSkins.IndexOf(newSkin));
             if (ncs < 0) { ncs = 0; }
             this.Skins.CurrentTableSkin = ncs;

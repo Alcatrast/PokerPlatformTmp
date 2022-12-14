@@ -194,7 +194,8 @@ namespace Poker.AccountsMC
                             return GetResponse(accountIdName, accountPassword);
                         } else if (command[0] == "UPDATE")
                         {
-                            throw new NotImplementedException();
+                            accounts[GetIndex(accountIdName)].Update(command[1], command[2]);
+                            return GetResponse(accountIdName, accountPassword);
                         }
                     }
                 }
