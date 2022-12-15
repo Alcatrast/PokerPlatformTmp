@@ -19,11 +19,32 @@ namespace Poker.AccountsMC
         public Account() { }
         public Account(string id, string name, string password)
         {
+            Balance = 0;
+            this.CurrentRoomId = string.Empty;
             Id = id;
             Name = name;
             this.password = password;
-            Balance = 0;
             Skins = new Cosmetics();
+        }
+        public Account(AccountXml xml)
+        {
+            this.Balance = xml.Balance;
+            this.CurrentRoomId=string.Empty;
+            this.Id = xml.Id;
+            this.Name = xml.Name;
+            this.password = xml.Password;
+            this.Skins = xml.Skins;
+            
+        }
+        public AccountXml ForSerilaizer() 
+        {
+            AccountXml res = new AccountXml();
+            res.Balance=this.Balance;
+            res.Id = this.Id;
+            res.Name=this.Name;
+            res.Password = this.password;
+            res.Skins=this.Skins;
+            return res;
         }
         public bool IsPasswordRight(string password)
         {
@@ -73,6 +94,7 @@ namespace Poker.AccountsMC
             else if (type == "CBS") { UpdateCardBackSkin(newProperty); }
             else if (type == "CFS") { UpdateCardFrontSkin(newProperty); }
             else if (type == "TS") { UpdateTableSkin(newProperty); }
+            
         }
         private void UpdateName(string newName) { this.Name = newName; }
         private void UpdateAvatar(string newSkin)

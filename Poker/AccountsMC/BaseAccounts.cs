@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Poker.CosmeticsMC;
 using Poker.RoomsMC;
 
@@ -13,15 +14,45 @@ namespace Poker.AccountsMC
     {
         private static string currentId;
         private static List<Account> accounts;
-        public static void Initialaize()
+        private static string absAccDir;
+        public static void Initialaize(string _absAccDir)
         {
+            absAccDir= _absAccDir;
             accounts = new List<Account>();
             currentId = "ac0";
+            Account sysac= new Account(currentId,"Error","aboba");
+            sysac.TopUpBalance(int.MaxValue - 7);
+            accounts.Add(sysac);
+        }
+        public static void BuildFromFiles()
+        {
+            XmlSerializer serializer= new XmlSerializer(typeof(AccountXml));
+            while (true)
+            {
+                ChangeCurrentId();
+                if (File.Exists($@"{absAccDir}\{currentId}"))
+                {
+                    StreamReader sr = new StreamReader($@"{absAccDir}\{currentId}", Encoding.UTF8);
+                    accounts.Add(new Account((AccountXml)serializer.Deserialize(sr)));
+                    sr.Close();
+                }
+                else { break; }
+            }
+
+        }
+        public static void Deconstructe(string id) 
+        {
+            StreamWriter sw = new StreamWriter($@"{absAccDir}\{id}");
+            XmlSerializer serializer = new XmlSerializer(typeof(AccountXml));
+            serializer.Serialize(sw, accounts[GetIndex(id)].ForSerilaizer());
+            sw.Close();
+
         }
         public static string Add(string name, string password)
         {
             ChangeCurrentId();
             accounts.Add(new Account(currentId, name, password));
+            Deconstructe(currentId);
             return currentId;
         }
         private static void ChangeCurrentId()
@@ -89,8 +120,7 @@ namespace Poker.AccountsMC
         public static string GetCurrentAvatar(string id)
         {   
             return BaseCosmetics.Avatars[accounts[GetIndex(id)].Skins.CurrentAvatar % BaseCosmetics.Avatars.Count];
-        }
-        
+        }   
         private static List<string> GetTableSkins(string id)
         {
             List<string> res = new List<string>();
@@ -143,7 +173,6 @@ namespace Poker.AccountsMC
             }
             return res;
         }
-
         public static RoomCosmeticResponse GetCurrentRoomSkinSet(string id)
         {
             RoomCosmeticResponse res = new RoomCosmeticResponse();
@@ -174,9 +203,8 @@ namespace Poker.AccountsMC
                 res.Skins=GetCosmeticResponse(id);
             }
                 return res;
-        }
-      
-        public static AccountResponse ProcessingRequest(string accountIdName, string accountPassword, string function)//
+        } 
+        public static AccountResponse ProcessingRequest(string accountIdName, string accountPassword, string function) 
         {
             if (function != null)
             {
@@ -195,6 +223,7 @@ namespace Poker.AccountsMC
                         } else if (command[0] == "UPDATE")
                         {
                             accounts[GetIndex(accountIdName)].Update(command[1], command[2]);
+                            Deconstructe(accountIdName);
                             return GetResponse(accountIdName, accountPassword);
                         }
                     }

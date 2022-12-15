@@ -23,14 +23,14 @@ namespace Poker
                         {
                             RequestShop(command);
                         }
-                        else if (command[0]=="ROOM" && command.Length>=4){ return SerializateToXml(RequestRoom(command)); }
-                        else if (command[0] == "ACC" && command.Length >= 4) { return SerializateToXml(RequestAccount(command)); }
+                        else if (command[0]=="ROOM" && command.Length>=4){ return SerializateResponseToXml(RequestRoom(command)); }
+                        else if (command[0] == "ACC" && command.Length >= 4) { return SerializateResponseToXml(RequestAccount(command)); }
                     }
                 }
             }
             return "ERROR";
         }
-        private static string SerializateToXml(object response) 
+        private static string SerializateResponseToXml(object response) 
         {
             string res = "ERROR";
             if (response != null)

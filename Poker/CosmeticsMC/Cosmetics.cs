@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Poker.CosmeticsMC
 {
-    internal class Cosmetics
+    [Serializable]
+    public class Cosmetics
     {
         public List<int> Avatars;
         public int CurrentAvatar;
