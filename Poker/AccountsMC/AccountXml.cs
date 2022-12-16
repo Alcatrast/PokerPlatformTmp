@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Poker.AccountsMC
 {
-    internal class AccountXml
+    [Serializable]
+    public class AccountXml
     {
         public string Id;
         public string Name;

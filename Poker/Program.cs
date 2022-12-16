@@ -15,6 +15,7 @@ namespace Poker
         {
 
             BaseAccounts.Initialaize(@"C:\temp\acc");
+            BaseAccounts.BuildFromFiles();
             BaseRooms.Initialaize();
             BaseCosmetics.Initializate();
             while (true)

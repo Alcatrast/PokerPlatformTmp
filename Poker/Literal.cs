@@ -9,11 +9,10 @@ namespace Poker
 {
     public static class Literal
     {
-        public static CommandWord Command= new CommandWord();
-        public static SplitSymbol Split= new SplitSymbol();
+        public static CommandWord Command = new CommandWord();
+        public static SplitSymbol Split = new SplitSymbol();
         public static PointWord Point = new PointWord();
         public static TypeWord Type = new TypeWord();
-
     }
     public class SplitSymbol
     {
