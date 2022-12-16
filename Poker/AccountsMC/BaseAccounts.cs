@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -19,7 +20,7 @@ namespace Poker.AccountsMC
         {
             absAccDir= _absAccDir;
             accounts = new List<Account>();
-            currentId = "ac0";
+            currentId = (Literal.Type.IdPrefix.Account + "0");
             Account sysac= new Account(currentId,"Error","aboba");
             sysac.TopUpBalance(int.MaxValue - 7);
             accounts.Add(sysac);
@@ -58,19 +59,19 @@ namespace Poker.AccountsMC
         private static void ChangeCurrentId()
         {
             string sid = string.Empty;
-            for (int i = 2; i < currentId.Length; i++)
+            for (int i = Literal.Type.IdPrefix.Account.Length; i < currentId.Length; i++)
             {
                 sid += currentId[i];
             }
-            currentId = "ac" + Convert.ToString(int.Parse(sid) + 1);
+            currentId = Literal.Type.IdPrefix.Account + Convert.ToString(int.Parse(sid) + 1);
         }
         private static int GetIndex(string id)
         {
             if (id != null)
             {
-                if (id.Length > 2)
+                if (id.Length > Literal.Type.IdPrefix.Account.Length)
                 {
-                    if (id[0] == 'a' && id[1] == 'c')
+                    if (id.Substring(0, Literal.Type.IdPrefix.Account.Length) == Literal.Type.IdPrefix.Account)
                     {
                         string sid = string.Empty;
                         for (int i = 2; i < id.Length; i++)
@@ -210,17 +211,17 @@ namespace Poker.AccountsMC
             {
                 if (function.Length > 3)
                 {
-                    string[] command = function.Split(',');
+                    string[] command = function.Split(Literal.Split.Level2);///////////////////
                     if (command.Length > 0)
                     {
-                        if (command[0] == "CREATE") 
+                        if (command[0] == Literal.Command.Create) 
                         {
                             string id= Add(accountIdName, accountPassword);
                             return GetResponse(id, accountPassword);
-                        }else if (command[0] == "GET")
+                        }else if (command[0] == Literal.Command.Get)
                         {
                             return GetResponse(accountIdName, accountPassword);
-                        } else if (command[0] == "UPDATE")
+                        } else if (command[0] == Literal.Command.Update)
                         {
                             accounts[GetIndex(accountIdName)].Update(command[1], command[2]);
                             Deconstructe(accountIdName);

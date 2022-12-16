@@ -16,15 +16,15 @@ namespace Poker
             {
                 if (request.Length > 3)
                 {
-                    string[] command = request.Split('/');
+                    string[] command = request.Split(Literal.Split.Level1);
                     if(command.Length > 0)
                     {
-                        if (command[0] == "SHOP")
+                        if (command[0] == Literal.Point.Shop)
                         {
                             RequestShop(command);
                         }
-                        else if (command[0]=="ROOM" && command.Length>=4){ return SerializateResponseToXml(RequestRoom(command)); }
-                        else if (command[0] == "ACC" && command.Length >= 4) { return SerializateResponseToXml(RequestAccount(command)); }
+                        else if (command[0]== Literal.Point.Room && command.Length>=4){ return SerializateResponseToXml(RequestRoom(command)); }
+                        else if (command[0] == Literal.Point.Account && command.Length >= 4) { return SerializateResponseToXml(RequestAccount(command)); }
                     }
                 }
             }

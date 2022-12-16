@@ -89,11 +89,11 @@ namespace Poker.AccountsMC
         
         public void Update(string type, string newProperty)
         {
-            if (type == "N") { UpdateName(newProperty); }
-            else if (type == "A") { UpdateAvatar(newProperty); }
-            else if (type == "CBS") { UpdateCardBackSkin(newProperty); }
-            else if (type == "CFS") { UpdateCardFrontSkin(newProperty); }
-            else if (type == "TS") { UpdateTableSkin(newProperty); }
+            if (type == Literal.Type.Name) { UpdateName(newProperty); }
+            else if (type == Literal.Type.Skin.Avatar) { UpdateAvatar(newProperty); }
+            else if (type == Literal.Type.Skin.CardBack) { UpdateCardBackSkin(newProperty); }
+            else if (type == Literal.Type.Skin.CardFront) { UpdateCardFrontSkin(newProperty); }
+            else if (type == Literal.Type.Skin.Table) { UpdateTableSkin(newProperty); }
             
         }
         private void UpdateName(string newName) { this.Name = newName; }

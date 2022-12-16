@@ -15,17 +15,17 @@ namespace Poker.RoomsMC
         public static void Initialaize()
         {
             rooms = new List<Room>();
-            currentRoomId = "r0";
+            currentRoomId = Literal.Type.IdPrefix.Room + "0";
 
         }
         private static void ChangeCurrentRoomId()
         {
             string sid = string.Empty;
-            for (int i = 1; i < currentRoomId.Length; i++)
+            for (int i = Literal.Type.IdPrefix.Room.Length; i < currentRoomId.Length; i++)
             {
                 sid += currentRoomId[i];
             }
-            currentRoomId = "r" + Convert.ToString(int.Parse(sid) + 1);
+            currentRoomId = Literal.Type.IdPrefix.Room + Convert.ToString(int.Parse(sid) + 1);
         }
         private static int GetIndex(string id)
         {
@@ -33,10 +33,10 @@ namespace Poker.RoomsMC
             {
                 if (id.Length > 1)
                 {
-                    if (id[0] == 'r')
+                    if (id.Substring(0, Literal.Type.IdPrefix.Room.Length) == Literal.Type.IdPrefix.Room)
                     {
                         string sid = string.Empty;
-                        for (int i = 1; i < id.Length; i++)
+                        for (int i = Literal.Type.IdPrefix.Room.Length; i < id.Length; i++)
                         {
                             sid += id[i];
                         }
@@ -87,10 +87,10 @@ namespace Poker.RoomsMC
             {
                 if (function.Length > 3)
                 {
-                    string[] command = function.Split(',');
+                    string[] command = function.Split(Literal.Split.Level2);
                     if (command.Length > 0)
                     {
-                        if (command[0] == "CREATE")
+                        if (command[0] == Literal.Command.Create)
                         {
                             if (command.Length >= 3)
                             {
@@ -102,11 +102,11 @@ namespace Poker.RoomsMC
                                     return Get(accountId, accountPassword);
                                 }
                                 else
-                                {//
+                                {
                                     return new RoomResponse();
                                 }
                             }
-                            else if (command[0] == "JOIN")
+                            else if (command[0] == Literal.Command.Join)
                             {
                                 if (command.Length >= 2)
                                 {
@@ -120,7 +120,7 @@ namespace Poker.RoomsMC
                                     }
                                 }
                             }
-                            else if (command[0] == "LEAVE")
+                            else if (command[0] == Literal.Command.Leave)
                             {
                                 if (Leave(accountId, accountPassword))
                                 {
@@ -131,7 +131,7 @@ namespace Poker.RoomsMC
                                     return Get(accountId, accountPassword);
                                 }
                             }
-                            else if (command[0] == "UPDATE")
+                            else if (command[0] == Literal.Command.Update)
                             {
                                 if (command.Length >= 2)
                                 {
@@ -139,9 +139,9 @@ namespace Poker.RoomsMC
                                     else { return Get(accountId, accountPassword); }
                                 }
                             }
-                            else if (command[0] == "GET")
+                            else if (command[0] == Literal.Command.Get)
                             {
-                               return Get(accountId, accountPassword);  
+                                return Get(accountId, accountPassword);
                             }
                         }
                     }

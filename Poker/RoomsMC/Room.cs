@@ -13,7 +13,7 @@ namespace Poker.RoomsMC
 
     internal class Room
     {
-        public string RoomId { get; private set; }//
+        public string RoomId { get; private set; }
         private List<string> tmpIds;
         private int countAccounts;
         public int StartBank { get; private set; }
@@ -86,22 +86,22 @@ namespace Poker.RoomsMC
             {
                 if (RoomState == 2 && BaseAccounts.GetCurrentRoom(accountId) == RoomId && BaseAccounts.IsPasswordRight(accountId, accountPassword) && function.Length > 0)
                 {
-                    string[] comm = function.Split();
+                    string[] comm = function.Split(Literal.Split.Level3);
                     if (comm.Length > 0)
                     {
-                        if (comm[0] == "START")
+                        if (comm[0] == Literal.Command.Round.Start)
                         {
                             bb = StartRound(accountId);
                         }
-                        else if (comm[0] == "END")
+                        else if (comm[0] == Literal.Command.Round.Finish)
                         {
                             bb = FinishRound(accountId);
                         }
-                        else if (comm[0] == "CLOSE")
+                        else if (comm[0] == Literal.Command.Round.Close)
                         {
                             CloseRoom(accountId);
                         }
-                        else if (comm[0] == "MOVE" && comm.Length > 1)
+                        else if (comm[0] == Literal.Command.Round.Move && comm.Length > 1)
                         {
                             int sb = 0;
                             int.TryParse(comm[1], out sb);

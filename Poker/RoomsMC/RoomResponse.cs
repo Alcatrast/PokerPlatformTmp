@@ -32,7 +32,7 @@ namespace Poker.RoomsMC
         public string Name;
         public string Avatar;
         public int Bid;
-        public int Money;//
+        public int Money;
         public List<string> Cards;
         public List<string> CombinationCard;
         public int CombinationId;
