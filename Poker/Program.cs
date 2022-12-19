@@ -2,25 +2,48 @@
 using System.IO;
 using System.Text.Json;
 using System.Xml.Serialization;
+using System.IO;
+
 using Poker.AccountsMC;
 using Poker.CosmeticsMC;
 using Poker.PokerGameMC;
 using Poker.RoomsMC;
+using System.Net;
+using System.Text;
 
 namespace Poker
 {
     public class Program
     {
-        static void Main(string[] args)
+        const string accountDir = "accs";
+        const string url="http://localhost:8080/";
+        static async Task Main(string[] args)
         {
-
-            BaseAccounts.Initialaize(@"C:\temp\acc");
+            
+            if (!Directory.Exists(accountDir))
+            {
+                Directory.CreateDirectory(accountDir);
+            }
+            BaseAccounts.Initialaize(accountDir);
             BaseAccounts.BuildFromFiles();
             BaseRooms.Initialaize();
             BaseCosmetics.Initializate();
+
+            HttpListener server = new HttpListener();
+            server.Prefixes.Add(url);
+            server.Start();
+            Console.WriteLine("server started");
+
             while (true)
             {
-                Console.WriteLine(MainController.ProcessRequest(Console.ReadLine()));
+                var context = await server.GetContextAsync();
+                StreamReader sr = new StreamReader(context.Request.InputStream);
+                string request = sr.ReadToEnd();  
+                string response = MainController.ProcessRequest(request);
+                byte[] buffer= Encoding.UTF8.GetBytes(response);
+                context.Response.ContentLength64= buffer.Length;
+                context.Response.OutputStream.Write(buffer, 0, buffer.Length);
+                sr.Close();
             }
             
         }
