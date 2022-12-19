@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-
+﻿
 namespace Poker.PokerGameMC
 {
     [Serializable]
     public class GameState
-    {//
+    {
         public int countPlayers;
         public int nextMovePlayerId;
         /// <summary>
